@@ -13,7 +13,7 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 // Checkout the repository using the defined branch
-                git url: 'https://github.com/satya-git07/Netflix-project.git', branch: "${GIT_BRANCH}"
+                git url: 'https://github.com/satya-git07/DevOpsNetflix-Project.git', branch: "${GIT_BRANCH}"
             }
         }
         stage('Terraform Init') {
