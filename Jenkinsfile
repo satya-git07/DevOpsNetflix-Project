@@ -20,6 +20,7 @@ pipeline {
             steps {
                 // Initialize Terraform
                 sh 'terraform init'
+                sh 'ls -la'
             }
         }
         stage('Terraform Apply') {
