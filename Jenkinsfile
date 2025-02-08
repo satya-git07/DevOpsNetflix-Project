@@ -16,6 +16,18 @@ pipeline {
                 git url: 'https://github.com/satya-git07/DevOpsNetflix-Project.git', branch: "${GIT_BRANCH}"
             }
         }
+        stage("Docker Build & Push"){
+            steps{
+                script{
+                   withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
+                       sh "docker build -t netflix ."
+                       sh "docker tag netflix:latest satyadockerhub07/netflix:tagname"
+                       sh "docker push satyadockerhub07/netflix:tagname"
+                    }
+                }
+            }
+        }
+        
         stage('Terraform Init') {
             steps {
                 // Initialize Terraform
@@ -52,7 +64,8 @@ pipeline {
                     script {
                         sh 'gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS'
                         sh "gcloud container clusters get-credentials ${CLUSTER_NAME} --zone ${ZONE} --project ${PROJECT_ID}"
-                        sh 'kubectl apply -f deploy.yaml'
+                        sh 'kubectl apply -f deployment.yml'
+                        sh 'kubectl apply -f service.yml'
                     }
                 }
             }
