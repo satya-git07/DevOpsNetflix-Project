@@ -43,19 +43,7 @@ pipeline {
                 }
             }
         }
-       stage("Docker Build & Push"){
-            steps{
-                script{
-                   withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
-                       sh "docker build -t netflix ."
-                       sh "docker tag netflix:latest satyadockerhub07/netflix:tagname"
-                       sh "docker push satyadockerhub07/netflix:tagname"
-                    }
-                }
-            }
-        }
-
-
+       
         
         stage('Deploy to GKE') {
             steps {
