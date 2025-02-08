@@ -19,7 +19,7 @@ pipeline {
         stage("Docker Build & Push"){
             steps{
                 script{
-                   withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
+                   withDockerRegistry(credentialsId: 'docker-credentials', toolName: 'docker'){   
                        sh "docker build -t netflix ."
                        sh "docker tag netflix:latest satyadockerhub07/netflix:tagname"
                        sh "docker push satyadockerhub07/netflix:tagname"
