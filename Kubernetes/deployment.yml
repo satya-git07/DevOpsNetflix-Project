@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: netflix-app
-        image: satyadockerhub07/netflix
+        image: satyadockerhub07/latest
         ports:
         - containerPort: 80
