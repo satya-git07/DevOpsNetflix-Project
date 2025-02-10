@@ -1,21 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: netflix-app
-  labels:
-    app: netflix-app
+  name: netflix-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: netflix-app
+      app: netflix
   template:
     metadata:
       labels:
-        app: netflix-app
+        app: netflix
     spec:
       containers:
-      - name: netflix-app
-        image: satyadockerhub07/netflix
+      - name: netflix
+        image: satyadockerhub07/netflix:tagname  # Docker image from Docker Hub
         ports:
         - containerPort: 80
