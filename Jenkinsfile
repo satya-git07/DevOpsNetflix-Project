@@ -7,9 +7,6 @@ pipeline {
         ZONE = 'us-west3'
         PROJECT_ID = 'satyanarayana'
         GIT_BRANCH = 'main'
-        SONARQUBE_HOST = 'http://192.168.2.109:9000'  // Your SonarQube Server URL
-        SONARQUBE_PROJECT_KEY = 'netflix'  // Your SonarQube Project Key
-        SONARQUBE_TOKEN = 'sqp_2111c9518a6ec5dbbac2cb53b86d2e522032134d'  // Your SonarQube Token
     }
 
     stages {
@@ -19,35 +16,18 @@ pipeline {
                 git url: 'https://github.com/satya-git07/DevOpsNetflix-Project.git', branch: "${GIT_BRANCH}"
             }
         }
-        
-        // SonarQube Analysis Stage using sonar-scanner
-        stage('SonarQube Analysis') {
-            steps {
-                script {
-                    // Run SonarQube analysis using sonar-scanner
-                    sh """
-                        sonar-scanner \
-                            -Dsonar.projectKey=${SONARQUBE_PROJECT_KEY} \
-                            -Dsonar.sources=. \
-                            -Dsonar.host.url=${SONARQUBE_HOST} \
-                            -Dsonar.login=${SONARQUBE_TOKEN}
-                    """
-                }
-            }
-        }
-        
-        stage("Docker Build & Push") {
-            steps {
-                script {
-                    withDockerRegistry(credentialsId: 'docker-credentials', toolName: 'docker') {   
-                        sh "docker build -t netflix ."
-                        sh "docker tag netflix:latest satyadockerhub07/netflix:tagname"
-                        sh "docker push satyadockerhub07/netflix:tagname"
+        stage("Docker Build & Push"){
+            steps{
+                script{
+                   withDockerRegistry(credentialsId: 'docker-credentials', toolName: 'docker'){   
+                       sh "docker build -t netflix ."
+                       sh "docker tag netflix:latest satyadockerhub07/netflix:tagname"
+                       sh "docker push satyadockerhub07/netflix:tagname"
                     }
                 }
             }
         }
-
+        
         stage('Terraform Init') {
             steps {
                 // Initialize Terraform
@@ -55,7 +35,6 @@ pipeline {
                 sh 'ls -la'
             }
         }
-
         stage('Terraform Apply') {
             steps {
                 // Authenticate and apply Terraform changes
@@ -64,7 +43,8 @@ pipeline {
                 }
             }
         }
-
+       
+        
         stage('Deploy to GKE') {
             steps {
                 // Authenticate and deploy to GKE
@@ -79,8 +59,8 @@ pipeline {
             }
         }
     }
-
-    post {
+ 
+post {
         always {
             cleanWs()
         }
