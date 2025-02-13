@@ -2,14 +2,13 @@ pipeline {
     agent any
 
     environment {
-        // Define values as environment variables for better maintainability
         CLUSTER_NAME = 'my-cluster1'
         ZONE = 'us-west3'
         PROJECT_ID = 'satyanarayana'
         GIT_BRANCH = 'main'
-        SONARQUBE_HOST = 'http://192.168.2.109:9000'  // Your SonarQube Server URL
-        SONARQUBE_PROJECT_KEY = 'netflix'  // Your SonarQube Project Key
-        SONARQUBE_TOKEN = 'squ_d8a6704a71d077aff483843ba032f5ca800e3d42'  // Your SonarQube Token
+        //SONARQUBE_HOST = 'http://192.168.2.109:9000'  // Your SonarQube Server URL
+        //SONARQUBE_PROJECT_KEY = 'netflix'  // Your SonarQube Project Key
+        //SONARQUBE_TOKEN = 'squ_d8a6704a71d077aff483843ba032f5ca800e3d42'  // Your SonarQube Token
     }
 
     stages {
@@ -27,10 +26,10 @@ pipeline {
                     // Run SonarQube analysis using sonar-scanner
                     sh """
                         sonar-scanner \
-                            -Dsonar.projectKey=${SONARQUBE_PROJECT_KEY} \
+                            -Dsonar.projectKey='netflix' \
                             -Dsonar.sources=. \
-                            -Dsonar.host.url=${SONARQUBE_HOST} \
-                            -Dsonar.login=${SONARQUBE_TOKEN}
+                            -Dsonar.host.url='http://192.168.2.109:9000' \
+                            -Dsonar.login='squ_d8a6704a71d077aff483843ba032f5ca800e3d42'
                     """
                 }
             }
@@ -47,7 +46,14 @@ pipeline {
                 }
             }
         }
+        
+          stage("TRIVY"){
+                    steps{
+                        sh "trivy image satyadockerhub07/netflix:tagname > trivyimage.txt" 
+                    }
+                }
 
+        
         stage('Terraform Init') {
             steps {
                 // Initialize Terraform
