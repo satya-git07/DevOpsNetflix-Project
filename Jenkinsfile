@@ -9,7 +9,7 @@ pipeline {
         GIT_BRANCH = 'main'
         SONARQUBE_HOST = 'http://192.168.2.109:9000'  // Your SonarQube Server URL
         SONARQUBE_PROJECT_KEY = 'netflix'  // Your SonarQube Project Key
-        SONARQUBE_TOKEN = 'sqp_4e5bded763495df79c3681e0b528e0992a94ad14'  // Your SonarQube Token
+        SONARQUBE_TOKEN = 'squ_d8a6704a71d077aff483843ba032f5ca800e3d42'  // Your SonarQube Token
     }
 
     stages {
