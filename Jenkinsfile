@@ -6,9 +6,9 @@ pipeline {
         ZONE = 'us-west3'
         PROJECT_ID = 'satyanarayana'
         GIT_BRANCH = 'main'
-        //SONARQUBE_HOST = 'http://192.168.2.109:9000'  // Your SonarQube Server URL
+        //SONARQUBE_HOST = 'http://34.27.61.33:9000'  // Your SonarQube Server URL
         //SONARQUBE_PROJECT_KEY = 'netflix'  // Your SonarQube Project Key
-        //SONARQUBE_TOKEN = 'squ_d8a6704a71d077aff483843ba032f5ca800e3d42'  // Your SonarQube Token
+        //SONARQUBE_TOKEN = 'sqp_03348e71430a3b7a3896ba9d3fd6fb2ce8cea3f9'  // Your SonarQube Token
     }
 
     stages {
@@ -28,8 +28,8 @@ pipeline {
                         sonar-scanner \
                             -Dsonar.projectKey='netflix' \
                             -Dsonar.sources=. \
-                            -Dsonar.host.url='http://192.168.2.109:9000' \
-                            -Dsonar.login='squ_d8a6704a71d077aff483843ba032f5ca800e3d42'
+                            -Dsonar.host.url='http://34.27.61.33:9000' \
+                            -Dsonar.login='sqp_03348e71430a3b7a3896ba9d3fd6fb2ce8cea3f9'
                     """
                 }
             }
