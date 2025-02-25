@@ -19,21 +19,22 @@ pipeline {
             }
         }
         
-        // SonarQube Analysis Stage using sonar-scanner
+               // SonarQube Analysis Stage using sonar-scanner
         stage('SonarQube Analysis') {
             steps {
                 script {
                     // Run SonarQube analysis using sonar-scanner
                     sh """
                         sonar-scanner \
-                            -Dsonar.projectKey='netflix' \
-                            -Dsonar.sources=. \
-                            -Dsonar.host.url='http://34.27.61.33:9000' \
-                            -Dsonar.login='sqp_03348e71430a3b7a3896ba9d3fd6fb2ce8cea3f9'
+                            -Dsonar.projectKey="netflix" \
+                            -Dsonar.sources="." \
+                            -Dsonar.host.url="http://34.27.61.33:9000" \
+                            -Dsonar.login="sqp_03348e71430a3b7a3896ba9d3fd6fb2ce8cea3f9"
                     """
                 }
             }
         }
+
         
         stage("Docker Build & Push") {
             steps {
