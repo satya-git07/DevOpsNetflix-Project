@@ -28,8 +28,8 @@ pipeline {
                         /opt/sonar-scanner/bin/sonar-scanner \
                             -Dsonar.projectKey="netflix" \
                             -Dsonar.sources="." \
-                            -Dsonar.host.url="http://34.27.61.33:9000" \
-                            -Dsonar.login="sqp_03348e71430a3b7a3896ba9d3fd6fb2ce8cea3f9"
+                            -Dsonar.host.url="http://192.168.2.109:8081" \
+                            -Dsonar.login="squ_36f70d7ed8c90fec451735aa1a7621519c315194"
                     """
                 }
             }
@@ -79,8 +79,6 @@ pipeline {
                     script {
                         sh 'gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS'
                         sh "gcloud container clusters get-credentials ${CLUSTER_NAME} --zone ${ZONE} --project ${PROJECT_ID}"
-                        sh 'kubectl apply -f ./Kubernetes/deployment.yml' 
-                        sh 'kubectl apply -f ./Kubernetes/service.yml'
                     }
                 }
             }
