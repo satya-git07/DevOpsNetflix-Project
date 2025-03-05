@@ -4,7 +4,7 @@ pipeline {
     environment {
         CLUSTER_NAME = 'my-cluster1'
         ZONE = 'us-west3'
-        PROJECT_ID = 'satyanarayana'
+        PROJECT_ID = 'lyrical-bus-452711-c5'
         GIT_BRANCH = 'main'
         //SONARQUBE_HOST = 'http://34.27.61.33:9000'  // Your SonarQube Server URL
         //SONARQUBE_PROJECT_KEY = 'netflix'  // Your SonarQube Project Key
