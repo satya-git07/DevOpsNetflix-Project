@@ -1,7 +1,7 @@
 variable "project_id" {
   description = "The GCP project ID"
   type        = string
-  default     = "satyanarayana"  
+  default     = "lyrical-bus-452711-c5"  
 }
 
 variable "region" {
