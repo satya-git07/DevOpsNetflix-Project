@@ -25,7 +25,7 @@ pipeline {
                 script {
                     // Run SonarQube analysis using sonar-scanner
                     sh """
-                        /opt/sonar-scanner/bin/sonar-scanner \
+                        /opt/sonar-scanner-new/sonar-scanner-4.8.0.2856-linux/bin/sonar-scanner \
                             -Dsonar.projectKey="netflix" \
                             -Dsonar.sources="." \
                             -Dsonar.host.url="http://192.168.2.109:8081" \
